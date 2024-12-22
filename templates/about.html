@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}About Us{% endblock %}
+
+{% block content %}
+    <h1>About Us</h1>
+    <div class="content-text">
+        {{ content|safe }}
+    </div>
+
+    {% if current_user.is_authenticated %}
+    <div class="editor">
+        <h2>Edit Content</h2>
+        <form method="POST">
+            <textarea name="markdown" rows="10" cols="50">{{ markdown_content }}</textarea><br>
+            <input type="submit" value="Save">
+        </form>
+    </div>
+    {% endif %}
+{% endblock %}
+
+
+
+
+

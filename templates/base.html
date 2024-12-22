@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Flask App{% endblock %}</title>
+    <style>
+        /* Global reset for padding/margins */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Set up flexbox for the body */
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Ensure the page takes up full height */
+        }
+
+        /* Header and Footer styling */
+        header, footer {
+            background-color: #808080; /* Gray color */
+            color: white;
+            height: 0.75in; /* 3/4 inch height */
+            text-align: left; /* Align text to the left */
+            line-height: 50px; /* Center the text vertically */
+            padding: 0 10px;
+        }
+
+        /* Content block styling */
+        .content {
+            flex: 1; /* Take up remaining space */
+            margin-top: 0.75in; /* Space for the header */
+            margin-bottom: 0.75in; /* Space for the footer */
+            padding: 20px;
+        }
+
+        /* Sidebar Menu styling (moved to the right side) */
+        #menu {
+            display: block;
+            position: fixed;
+            top: 0;
+            right: 0; /* Align to the right side of the screen */
+            background-color: #333;
+            width: 250px;
+            height: 100%;
+            color: white;
+            padding: 10px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        #menu a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            margin: 10px 0;
+            font-size: 16px;
+        }
+
+        /* For smaller screens */
+        @media (max-width: 768px) {
+            .content {
+                margin-left: 0; /* Remove left margin for content */
+                padding-right: 0; /* Remove right margin for content */
+            }
+        }
+
+        /* Centering footer content */
+        footer {
+            display: flex;
+            justify-content: center; /* Horizontally center */
+            align-items: center; /* Vertically center */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
+    <!-- Header -->
+    <header>
+        <!-- Menu items directly in the header -->
+        <nav>
+            <a href="{{ url_for('home') }}">Home</a>
+            <a href="{{ url_for('about') }}">About</a>
+            <a href="{{ url_for('contact') }}">Contact</a>
+            {% if current_user.is_authenticated %}
+                <a href="{{ url_for('dashboard') }}">Dashboard</a>
+                <a href="{{ url_for('logout') }}">Logout</a>
+            {% else %}
+                <a href="{{ url_for('login') }}">Login</a>
+            {% endif %}
+        </nav>
+    </header>
+
+    <!-- Sidebar Menu (now on the right side) -->
+    <div id="menu">
+        <a href="{{ url_for('home') }}">Home</a>
+        <a href="{{ url_for('about') }}">About</a>
+        <a href="{{ url_for('contact') }}">Contact</a>
+        {% if current_user.is_authenticated %}
+            <a href="{{ url_for('dashboard') }}">Dashboard</a>
+            <a href="{{ url_for('logout') }}">Logout</a>
+        {% else %}
+            <a href="{{ url_for('login') }}">Login</a>
+        {% endif %}
+    </div>
+
+    <!-- Content Block -->
+    <div class="content">
+        {% block content %}{% endblock %}
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Your Website. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>

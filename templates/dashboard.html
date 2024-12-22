@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block content %}
+    <h1>Admin Dashboard</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Address</th>
+                <th>Phone Number</th>
+                <th>Comments</th>
+                <th>IP Address</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for submission in submissions %}
+            <tr>
+                <td>{{ submission.name }}</td>
+                <td>{{ submission.email }}</td>
+                <td>{{ submission.address }}</td>
+                <td>{{ submission.phone_number }}</td>
+                <td>{{ submission.comments }}</td>
+                <td>{{ submission.ip_address }}</td>
+                <td>
+                    <form method="POST" action="{{ url_for('delete_submission', id=submission.id) }}">
+                        <input type="submit" value="Delete">
+                    </form>
+                    <form method="POST" action="{{ url_for('block_ip', ip=submission.ip_address) }}">
+                        <input type="submit" value="Block IP {{ submission.ip_address }}">
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

@@ -1,0 +1,104 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Header */
+.header {
+    background-color: gray;  /* Set the header to gray */
+    height: 0.75in;  /* Set the header height to 0.75 inches */
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.menu-items a {
+    color: white;
+    text-decoration: none;
+    margin-right: 20px; /* Space between menu items */
+    font-size: 18px;
+}
+
+.menu-items a:hover {
+    color: #ddd;
+}
+
+.hamburger-menu-right {
+    font-size: 30px;
+    color: white;
+    cursor: pointer;
+    position: absolute;
+    right: 10px; /* Positioned on the right side of the header */
+    top: 10px;   /* Adjust top position as needed */
+    z-index: 15; /* Ensures hamburger icon is above other elements */
+}
+
+/* Side Menu */
+.side-menu {
+    position: fixed;
+    top: 0;
+    height: 100%;
+    width: 250px;
+    background-color: rgba(0, 0, 0, 0.8); /* Opaque black background */
+    transition: 0.3s;
+    padding-top: 60px;
+    z-index: 5;
+    overflow-x: hidden;
+}
+
+.right-side-menu {
+    right: -250px; /* Initially hidden off-screen */
+}
+
+.side-menu a {
+    display: block;
+    color: white;
+    padding: 16px;
+    text-decoration: none;
+    text-align: left;
+    font-size: 20px;
+}
+
+.side-menu a:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+.side-menu .close-btn {
+    position: absolute;
+    top: 10px;
+    left: 25px;
+    font-size: 36px;
+    color: white;
+    cursor: pointer;
+}
+
+.content {
+    padding: 20px;
+}
+
+.footer {
+    background-color: gray;  /* Set the footer to gray */
+    color: white;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+/* Responsive Design: Make sure the menus and nav work well on mobile */
+@media screen and (max-width: 600px) {
+    .header {
+        padding: 10px;
+    }
+    .hamburger-menu-right {
+        font-size: 40px;
+    }
+    .menu-items {
+        display: none; /* Hide the menu items on smaller screens */
+    }
+}
